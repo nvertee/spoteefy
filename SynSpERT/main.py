@@ -7,7 +7,7 @@ Created on Sat Jul 10 13:04:56 2021
 
 
 import Runner
-BASE_DIR="../InputsAndOutputs/"
+BASE_DIR="InputsAndOutputs/"
 
 BERT_PATH = BASE_DIR+"pretrained/scibert_scivocab_cased"   ### For SciERC
 #BERT_PATH = BASE_DIR+"pretrained/biobert_base_cased"      ### For ADE
