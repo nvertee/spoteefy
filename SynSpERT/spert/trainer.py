@@ -8,22 +8,6 @@ from typing import List, Dict, Tuple
 import torch
 from torch.nn import DataParallel
 from torch.optim import Optimizer
-from transformers import PreTrainedModel
-from transformers import PreTrainedTokenizer
-from transformers import BertConfig  #DKS
-
-from spert import util  ##DKS
-from spert.opt import tensorboardX
-
-SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
-
-
-class BaseTrainer:
-    """ Trainer base class with common methods """
-
-    def __init__(self, args: argparse.Namespace, config: BertConfig): #DKS
-        self.args = args
-        self.config = config   #DKS
         self._debug = self.args.debug
 
         # logging
@@ -124,9 +108,9 @@ class BaseTrainer:
 
         # save model
         if isinstance(model, DataParallel):
-            model.module.save_pretrained(dir_path)
+            torch.save(model.module.state_dict(), dir_path + "/pytorch_model.bin")
         else:
-            model.save_pretrained(dir_path)
+            torch.save(model.state_dict(), dir_path + "/pytorch_model.bin")
 
         # save vocabulary
         tokenizer.save_pretrained(dir_path)
