@@ -8,6 +8,22 @@ from typing import List, Dict, Tuple
 import torch
 from torch.nn import DataParallel
 from torch.optim import Optimizer
+from transformers import PreTrainedModel
+from transformers import PreTrainedTokenizer
+from transformers import BertConfig  #DKS
+
+from spert import util  ##DKS
+from spert.opt import tensorboardX
+
+SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
+
+
+class BaseTrainer:
+    """ Trainer base class with common methods """
+
+    def __init__(self, args: argparse.Namespace, config: BertConfig): #DKS
+        self.args = args
+        self.config = config   #DKS
         self._debug = self.args.debug
 
         # logging
